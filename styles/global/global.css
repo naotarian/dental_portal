@@ -1,24 +1,33 @@
 body {
+  margin: 0;
   margin-top: 60px;
   background-color: #f4f5f8;
-  font-family: "Yu Gothic", YuGothic, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Verdana, "メイリオ", Meiryo, sans-serif !important;
+  font-family: 'Yu Gothic', YuGothic, 'Hiragino Sans',
+    'Hiragino Kaku Gothic ProN', Verdana, 'メイリオ', Meiryo, sans-serif !important;
   color: rgba(0, 0, 0, 0.6);
 }
 
-
-
 h1 {
   font-weight: 700 !important;
-  font-family: "Yu Gothic",
-    YuGothic,
-    "Hiragino Sans",
-    "Hiragino Kaku Gothic ProN",
-    Verdana,
-    "メイリオ",
-    Meiryo,
-    sans-serif !important;
+  font-family: 'Yu Gothic', YuGothic, 'Hiragino Sans',
+    'Hiragino Kaku Gothic ProN', Verdana, 'メイリオ', Meiryo, sans-serif !important;
 }
-
+@media screen and (max-width: 767px) {
+  .pc-only {
+    display: none;
+  }
+  .manage-container {
+    margin: 0 auto;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .sp-only {
+    display: none;
+  }
+  .manage-container {
+    margin: 0 auto;
+  }
+}
 .flex {
   display: flex;
 }
@@ -31,25 +40,14 @@ h1 {
   font-size: 1.5rem;
 }
 
-/* *,
-::after,
-::before {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  vertical-align: inherit;
-} */
-
 .ml100 {
   margin-left: 100px;
 }
 
-input[type="button"],
-input[type="text"],
-input[type="submit"],
-input[type="image"],
+input[type='button'],
+input[type='text'],
+input[type='submit'],
+input[type='image'],
 textarea {
   outline: none !important;
 }
@@ -58,15 +56,15 @@ textarea {
   outline: none;
 }
 
-input[type="text"],
-input[type="password"],
+input[type='text'],
+input[type='password'],
 textarea,
 select {
   outline: none;
 }
 
-input[type="text"],
-input[type="password"],
+input[type='text'],
+input[type='password'],
 textarea,
 select {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -88,4 +86,179 @@ select {
 
 a {
   text-decoration: none;
+}
+.justify-space {
+  justify-content: space-between;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-right {
+  justify-content: right;
+}
+.gap-10 {
+  gap: 10px;
+}
+.gap-20 {
+  gap: 20px;
+}
+.gap-30 {
+  gap: 30px;
+}
+.gap-40 {
+  gap: 40px;
+}
+
+.manage-title {
+  padding: 1rem;
+  background-color: #a5e9d8;
+  /* background-color: #a5e9d8; */
+  text-align: center;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.45);
+}
+
+.content-wrap-1000 {
+  width: 1000px;
+  margin: 4rem auto 0 auto;
+}
+.content-wrap-1200 {
+  width: 1200px;
+  margin: 4rem auto 0 auto;
+}
+.content-wrap-1300 {
+  width: 1300px;
+  margin: 4rem auto 0 auto;
+}
+.content-wrap {
+  width: 800px;
+  margin: 4rem auto 0 auto;
+}
+@media screen and (max-width: 767px) {
+  .content-wrap-1000 {
+    width: 100%;
+    margin: 4rem auto 0 auto;
+  }
+}
+.item::before {
+  color: #009b9e;
+  content: '■';
+  font-size: 100%;
+  margin-right: 10px;
+}
+.al-center {
+  align-items: center;
+}
+.button-area {
+  text-align: center;
+  margin: 2rem auto;
+}
+.sticky {
+  position: sticky;
+}
+.z-999 {
+  z-index: 999;
+}
+.top-0 {
+  top: 0;
+}
+.bg-white {
+  background-color: #fff;
+}
+.color-white {
+  color: #fff;
+}
+.p1 {
+  padding: 1rem;
+}
+.mt1 {
+  margin-top: 1rem;
+}
+.mb1 {
+  margin-bottom: 1rem;
+}
+.mr1 {
+  margin-right: 1rem;
+}
+.ml1 {
+  margin-left: 1rem;
+}
+.b-gray {
+  border: 1px solid #ddd;
+}
+.color-display-span {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-left: 50px;
+}
+.focus-green:focus {
+  background-color: #a5e9d8;
+  color: #fff;
+}
+.text-r {
+  text-align: right;
+}
+.text-c {
+  text-align: center;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.top-0 {
+  top: 0;
+}
+.right-0 {
+  right: 0;
+}
+.left-0 {
+  left: 0;
+}
+.bottom-0 {
+  bottom: 0;
+}
+.p-relative {
+  position: relative;
+}
+
+.header-logo-area {
+  width: 250px;
+}
+.mt-header {
+  margin-top: 90px;
+}
+
+.filter-60 {
+  /* filter: contrast(60%); */
+}
+.top-visual:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 600px;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+.top-visual {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background-image: url('/images/top/top2.png');
+  background-size: cover;
+  z-index: 0;
+}
+
+.stand-out {
+  text-shadow: 0 2px 2px #666;
+}
+
+#topSearchArea {
+  width: 400px;
+  padding: 100px 0;
+  margin: 0 auto;
 }

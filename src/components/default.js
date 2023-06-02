@@ -31,6 +31,10 @@ const theme = createTheme({
       fontWeight: 500,
       color: 'rgba(0, 0, 0, 0.6)',
     },
+    body1White: {
+      fontWeight: 500,
+      color: '#fff',
+    },
     body2: {
       fontWeight: 700,
       color: 'rgba(0, 0, 0, 0.6)',
