@@ -8,11 +8,16 @@ import TextField from '@mui/material/TextField'
 import { useState } from 'react'
 import SearchModal from '@/components/Parts/Top/SearchModal'
 import Grid from '@mui/material/Grid'
+import { useRouter } from 'next/router'
 
 export default function Home() {
   const [openSearchModal, setOpenSearchModal] = useState(false)
   const handleOpen = () => setOpenSearchModal(true)
   const searchModalClose = () => setOpenSearchModal(false)
+  const router = useRouter()
+  const list = () => {
+    router.push('/dental/list')
+  }
   return (
     <>
       <Head>
@@ -62,7 +67,9 @@ export default function Home() {
                     md={12}
                     lg={12}
                     className="top-badge-area sp-only mt1">
-                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge" onClick={list}>
+                      土曜診療
+                    </span>
                     <span className="search-badge">土曜診療</span>
                     <span className="search-badge">土曜診療</span>
                     <span className="search-badge">土曜診療</span>
@@ -80,7 +87,9 @@ export default function Home() {
                     md={12}
                     lg={12}
                     className="top-badge-area pc-only mt1">
-                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge" onClick={list}>
+                      土曜診療
+                    </span>
                     <span className="search-badge">土曜診療</span>
                     <span className="search-badge">土曜診療</span>
                     <span className="search-badge">土曜診療</span>
