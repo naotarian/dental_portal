@@ -3,8 +3,16 @@ import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import Header from '../components/Parts/Template/Header'
 import Typography from '@mui/material/Typography'
+import Paper from '@mui/material/Paper'
+import TextField from '@mui/material/TextField'
+import { useState } from 'react'
+import SearchModal from '@/components/Parts/Top/SearchModal'
+import Grid from '@mui/material/Grid'
 
 export default function Home() {
+  const [openSearchModal, setOpenSearchModal] = useState(false)
+  const handleOpen = () => setOpenSearchModal(true)
+  const searchModalClose = () => setOpenSearchModal(false)
   return (
     <>
       <Head>
@@ -15,15 +23,42 @@ export default function Home() {
         />
       </Head>
       <Header />
-      <div className="manage-container mt-header p1">
+      <div className="manage-container mt-header">
         <div className="content-wrap-1000">
           <div className="top-visual filter-60">
             <div className="p1" id="topSearchArea">
               <Typography variant="h2" className="stand-out color-white">
                 条件別で歯科医院を検索！！
               </Typography>
+              <SearchModal
+                openSearchModal={openSearchModal}
+                searchModalClose={searchModalClose}
+              />
+              <Paper className="p1">
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={4} lg={4}>
+                    <TextField
+                      size="small"
+                      placeholder="駅名・エリア"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      onClick={handleOpen}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={8} lg={8}>
+                    <TextField
+                      size="small"
+                      placeholder="キーワード"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      onClick={handleOpen}
+                    />
+                  </Grid>
+                </Grid>
+              </Paper>
             </div>
-            {/* <img src="/images/top/top2.png" className="wi100 filter-50" /> */}
           </div>
         </div>
       </div>

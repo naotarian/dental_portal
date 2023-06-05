@@ -165,7 +165,6 @@ const Header = () => {
             </>
           ) : (
             <>
-              {console.log('ttt')}
               <LoginButton
                 id="basic-button"
                 aria-controls={open ? 'basic-menu' : undefined}
