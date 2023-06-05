@@ -56,6 +56,48 @@ export default function Home() {
                       onClick={handleOpen}
                     />
                   </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    md={12}
+                    lg={12}
+                    className="top-badge-area sp-only mt1">
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    md={12}
+                    lg={12}
+                    className="top-badge-area pc-only mt1">
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    md={12}
+                    lg={12}
+                    className="top-badge-area pc-only">
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                    <span className="search-badge">土曜診療</span>
+                  </Grid>
                 </Grid>
               </Paper>
             </div>

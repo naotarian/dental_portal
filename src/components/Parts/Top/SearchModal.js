@@ -42,8 +42,8 @@ const SearchModal = props => {
             <Button
               variant="contained"
               onClick={searchModalClose}
-              className="float">
-              閉じる
+              className="float wi-200">
+              検索
             </Button>
           </div>
         </Box>
