@@ -103,6 +103,9 @@ select {
 a {
   text-decoration: none;
 }
+.justify-around {
+  justify-content: space-around;
+}
 .justify-space {
   justify-content: space-between;
 }
@@ -192,11 +195,20 @@ a {
 .bg-iceberg {
   background-color: #dff2f6;
 }
+.bg-gray {
+  background-color: #ddd;
+}
 .color-white {
   color: #fff;
 }
+.p0 {
+  padding: 0;
+}
 .p1 {
   padding: 1rem;
+}
+.p2 {
+  padding: 2rem;
 }
 .pt1 {
   padding-top: 1rem;
@@ -215,6 +227,9 @@ a {
 }
 .ml1 {
   margin-left: 1rem;
+}
+.br0 {
+  border-radius: 0;
 }
 .b-gray {
   border: 1px solid #ddd;
@@ -247,6 +262,12 @@ a {
 .right-0 {
   right: 0;
 }
+.right-10 {
+  right: 10px;
+}
+.right-20 {
+  right: 20px;
+}
 .left-0 {
   left: 0;
 }
@@ -261,7 +282,7 @@ a {
   width: 250px;
 }
 .mt-header {
-  margin-top: 90px;
+  margin-top: 120px;
 }
 
 .filter-60 {
@@ -343,4 +364,10 @@ a {
     white-space: nowrap;
     height: 50px;
   }
+}
+.pointer {
+  cursor: pointer;
+}
+.dental-card:hover {
+  border: 1px solid #dff2f6;
 }

@@ -15,6 +15,9 @@ const theme = createTheme({
       dark: '#ba000d',
       contrastText: '#000',
     },
+    gray: {
+      main: '#d5d5d5',
+    },
   },
   typography: {
     fontFamily: [
@@ -39,6 +42,16 @@ const theme = createTheme({
       fontWeight: 700,
       color: 'rgba(0, 0, 0, 0.6)',
       // fontSize: '1.5rem'
+    },
+    bold: {
+      fontSize: '16px',
+      fontWeight: 'bold',
+      color: 'rgba(0, 0, 0, 0.6)',
+    },
+    largeBold: {
+      fontSize: '20px',
+      fontWeight: 'bold',
+      color: 'rgba(0, 0, 0, 0.6)',
     },
     h1: {
       fontSize: 22,
