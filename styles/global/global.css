@@ -219,8 +219,14 @@ a {
 .mt1 {
   margin-top: 1rem;
 }
+.mt2 {
+  margin-top: 2rem;
+}
 .mb1 {
   margin-bottom: 1rem;
+}
+.mb05 {
+  margin-bottom: 0.5rem;
 }
 .mr1 {
   margin-right: 1rem;
@@ -233,6 +239,9 @@ a {
 }
 .b-gray {
   border: 1px solid #ddd;
+}
+.bb-gray {
+  border-bottom: 1px solid #ddd;
 }
 .color-display-span {
   display: inline-block;
@@ -357,7 +366,9 @@ a {
   opacity: 0.8;
   border: 1px solid #0e90c4;
 }
-
+.white-noerap {
+  white-space: nowrap;
+}
 @media screen and (max-width: 767px) {
   .top-badge-area {
     overflow: scroll;
