@@ -438,3 +438,9 @@ a {
     border-radius: 0;
   }
 }
+.border-r-gray {
+  border-right: 1px solid #ddd;
+}
+.border-t-gray {
+  border-right: 1px solid #ddd;
+}

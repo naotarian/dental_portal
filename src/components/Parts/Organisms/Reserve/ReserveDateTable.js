@@ -8,36 +8,70 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein }
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-]
 const ReserveDateTable = props => {
-  const { dates } = props
+  const { dates, calendarDisplayYM, dateChange, minDate } = props
+  const cal = date => {
+    return [...Array(7)].map((_, i) => {
+      if (date[i].is_past) {
+        return (
+          <TableCell
+            align="center"
+            style={{
+              background: '#f5f5f5',
+              borderRight: '1px solid #ddd',
+              color: date[i].color,
+            }}>
+            {date[i]?.date}
+          </TableCell>
+        )
+      }
+      return (
+        <TableCell
+          align="center"
+          style={{ borderRight: '1px solid #ddd', color: date[i].color }}>
+          {date[i]?.date}
+          <br />
+          {date[i].is_closed ? '休' : '⚪︎'}
+        </TableCell>
+      )
+    })
+  }
   return (
     <>
       <div className="flex justify-space mt1 mb1">
-        <Button variant="outlined">前月</Button>
-        <Typography variant="bold">2023年6月</Typography>
-        <Button variant="outlined">翌月</Button>
+        <Button
+          variant="outlined"
+          onClick={() => dateChange('prev')}
+          disabled={minDate === calendarDisplayYM}>
+          前月
+        </Button>
+        <Typography variant="bold">{calendarDisplayYM}</Typography>
+        <Button variant="outlined" onClick={() => dateChange('next')}>
+          翌月
+        </Button>
       </div>
       <TableContainer component={Paper}>
-        <Table sx={{ maxWidth: 650 }}>
+        <Table sx={{ maxWidth: 650 }} className="b-gray">
           <TableHead>
             <TableRow>
-              <TableCell align="center">月</TableCell>
-              <TableCell align="center">火</TableCell>
-              <TableCell align="center">水</TableCell>
-              <TableCell align="center">木</TableCell>
-              <TableCell align="center">金</TableCell>
-              <TableCell align="center" className="color-saturday">
+              <TableCell align="center" className="border-r-gray">
+                月
+              </TableCell>
+              <TableCell align="center" className="border-r-gray">
+                火
+              </TableCell>
+              <TableCell align="center" className="border-r-gray">
+                水
+              </TableCell>
+              <TableCell align="center" className="border-r-gray">
+                木
+              </TableCell>
+              <TableCell align="center" className="border-r-gray">
+                金
+              </TableCell>
+              <TableCell
+                align="center"
+                className="border-r-gray color-saturday">
                 土
               </TableCell>
               <TableCell align="center" className="color-sunday">
@@ -51,16 +85,7 @@ const ReserveDateTable = props => {
                 <TableRow
                   key={index}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                  <TableCell align="center">
-                    {date[0]?.date}
-                    <br />○
-                  </TableCell>
-                  <TableCell align="center">{date[1]?.date}</TableCell>
-                  <TableCell align="center">{date[2]?.date}</TableCell>
-                  <TableCell align="center">{date[3]?.date}</TableCell>
-                  <TableCell align="center">{date[4]?.date}</TableCell>
-                  <TableCell align="center">{date[5]?.date}</TableCell>
-                  <TableCell align="center">{date[6]?.date}</TableCell>
+                  {cal(date)}
                 </TableRow>
               )
             })}

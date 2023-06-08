@@ -1,10 +1,23 @@
+import { useState, useEffect } from 'react'
 import HeadPaper from '@/components/Parts/Organisms/Reserve/HeadPaper'
 import { Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
+import Button from '@mui/material/Button'
 import ReserveDateTable from '@/components/Parts/Organisms/Reserve/ReserveDateTable'
 const Index = props => {
-  const { dental, dates } = props
+  const {
+    dental,
+    dates,
+    examination,
+    setExamination,
+    medicalHopeId,
+    setMedicalHopeId,
+    calendarDisplayYM,
+    dateChange,
+    minDate,
+  } = props
+  const [dateSelect, setDateSelect] = useState(false)
   return (
     <>
       <HeadPaper dental={dental} />
@@ -22,10 +35,10 @@ const Index = props => {
                 className="btnRadio"
                 id="new"
                 onChange={e => {
-                  console.log(e.target.value)
+                  setExamination(e.target.value)
                 }}
               />
-              <label for="new" className="btnRadioLabel wi45">
+              <label htmlFor="new" className="btnRadioLabel wi45">
                 初めて
               </label>
               <input
@@ -35,10 +48,10 @@ const Index = props => {
                 className="btnRadio"
                 id="repeat"
                 onChange={e => {
-                  console.log(e.target.value)
+                  setExamination(e.target.value)
                 }}
               />
-              <label for="repeat" className="btnRadioLabel wi45">
+              <label htmlFor="repeat" className="btnRadioLabel wi45">
                 2回目以降
               </label>
             </div>
@@ -55,11 +68,11 @@ const Index = props => {
                     className="btnRadio"
                     id={data.id}
                     onChange={e => {
-                      console.log(e.target.value)
+                      setMedicalHopeId(e.target.value)
                     }}
                   />
                   <label
-                    for={data.id}
+                    htmlFor={data.id}
                     className="btnRadioLabel wi45 mb1"
                     style={{ fontSize: '0.9rem' }}>
                     {data.title}
@@ -67,10 +80,29 @@ const Index = props => {
                 </>
               ))}
             </div>
-            <div className="bg-iceberg text-c p1 mt1">
-              <Typography variant="bold">予約日時</Typography>
-            </div>
-            <ReserveDateTable dates={dates} />
+            <Button
+              disabled={!examination || !medicalHopeId || dateSelect}
+              variant="contained"
+              fullWidth
+              onClick={() => {
+                setDateSelect(true)
+              }}
+              style={{ height: '50px' }}>
+              日時を選択する
+            </Button>
+            {dateSelect && (
+              <>
+                <div className="bg-iceberg text-c p1 mt1">
+                  <Typography variant="bold">予約日時</Typography>
+                </div>
+                <ReserveDateTable
+                  dates={dates}
+                  calendarDisplayYM={calendarDisplayYM}
+                  dateChange={dateChange}
+                  minDate={minDate}
+                />
+              </>
+            )}
           </Paper>
         </Grid>
         <Grid item xs={12} md={4} lg={4} className="relative">
