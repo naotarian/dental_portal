@@ -1,14 +1,18 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import Header from '../components/Parts/Template/Header'
-import Typography from '@mui/material/Typography'
+import { useState } from 'react'
+
+import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import TextField from '@mui/material/TextField'
-import { useState } from 'react'
-import SearchModal from '@/components/Parts/Top/SearchModal'
-import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+
+import Head from 'next/head'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
+
+import Header from '../components/Parts/Template/Header'
+
+import SearchModal from '@/components/Parts/Top/SearchModal'
+import { useAuth } from '@/hooks/auth'
 
 export default function Home() {
   const [openSearchModal, setOpenSearchModal] = useState(false)

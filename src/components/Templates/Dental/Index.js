@@ -1,14 +1,16 @@
 import * as React from 'react'
-import Typography from '@mui/material/Typography'
-import SideBarSearch from '@/components/Parts/Organisms/SideBarSearch'
-import DentalCard from '@/components/Parts/Organisms/DentalCard'
-import Grid from '@mui/material/Grid'
+
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import { styled } from '@mui/material/styles'
+import Grid from '@mui/material/Grid'
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip'
-import axios from '@/lib/axios'
+import Typography from '@mui/material/Typography'
+import { styled } from '@mui/material/styles'
+
+import DentalCard from '@/components/Parts/Organisms/DentalCard'
 import SearchDialog from '@/components/Parts/Organisms/Dialog/SearchDialog'
+import SideBarSearch from '@/components/Parts/Organisms/SideBarSearch'
+import axios from '@/lib/axios'
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} placement="right" />
 ))(({}) => ({
@@ -25,6 +27,7 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 const Index = () => {
   const [dataFetch, setDataFetch] = React.useState(false)
   const [searchDialogOpen, setSearchDialogOpen] = React.useState(false)
+  const [dentals, setDentals] = React.useState(null)
   const SearchDialogOpen = () => setSearchDialogOpen(true)
   const SearchDialogClose = () => setSearchDialogOpen(false)
   const [regions, setRegions] = React.useState(null)
@@ -32,6 +35,7 @@ const Index = () => {
     ;(async () => {
       const res = await axios.get('/api/portal/dental')
       setRegions(res.data.regions)
+      setDentals(res.data.dentals)
       setDataFetch(true)
     })()
   }, [])
@@ -120,9 +124,9 @@ const Index = () => {
                   </Button>
                 </div>
               </div>
-              <DentalCard />
-              <DentalCard />
-              <DentalCard />
+              {dentals?.map((data, index) => (
+                <DentalCard key={index} data={data} />
+              ))}
             </Grid>
           </Grid>
         </Box>

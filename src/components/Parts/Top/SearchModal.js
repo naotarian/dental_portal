@@ -1,9 +1,9 @@
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Modal from '@mui/material/Modal'
 import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
+import Modal from '@mui/material/Modal'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 const SearchModal = props => {
   const { openSearchModal, searchModalClose } = props
   return (

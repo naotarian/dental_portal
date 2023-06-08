@@ -1,23 +1,27 @@
+import { useState, useEffect } from 'react'
+
 import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 //hooks
-import { useState, useEffect } from 'react'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-import { useRouter } from 'next/router'
-import styled from 'styled-components'
-import Link from 'next/link'
-import Image from 'next/image'
-import { useAuth } from '@/hooks/auth'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import MenuIcon from '@mui/icons-material/Menu'
+import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
-import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import Typography from '@mui/material/Typography'
+
 import CloseIcon from '@mui/icons-material/Close'
-import Divider from '@mui/material/Divider'
+import MenuIcon from '@mui/icons-material/Menu'
+
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import styled from 'styled-components'
+
+import { useAuth } from '@/hooks/auth'
 
 const StyledAppBar = styled(AppBar)`
   padding: 1rem;
@@ -99,7 +103,7 @@ const Header = () => {
           </SpMenuTop>
         </ListItem>
         <StyledListItem>
-          <Grid className="wi100"></Grid>
+          <Grid className="wi100" />
         </StyledListItem>
         <StyledListItem>
           <Grid style={{ width: '100%' }}>

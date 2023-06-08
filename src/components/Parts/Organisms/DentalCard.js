@@ -1,27 +1,63 @@
 import * as React from 'react'
-import Box from '@mui/material/Box'
+
+import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-const DentalCard = () => {
+
+import EventAvailableIcon from '@mui/icons-material/EventAvailable'
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
+
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+const DentalCard = ({ ...data }) => {
+  const dentalData = data.data
+  const router = useRouter()
+  const reserve = () => {
+    router.push(`/reserve/${dentalData.id}`)
+  }
   return (
     <Card sx={{ minWidth: 275 }} className="mb1 br0 pointer dental-card">
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
+        <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+          {dentalData.selected_station?.remark}
         </Typography>
-        <Typography variant="h5" component="div">
-          test
+        <Typography variant="largeBold" component="div">
+          {dentalData.dental_name}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           adjective
         </Typography>
-        <Typography variant="body2">well meaning and kindly.</Typography>
+        <div className="mt1 mb1 flex gap-40">
+          <div style={{ width: '200px', height: '150px' }}>
+            <img
+              src="/images/testSambnail.jpg"
+              alt="テストサムネイル"
+              className="wi100"
+            />
+          </div>
+          <div>
+            <Typography>test</Typography>
+            <Typography>test</Typography>
+            <Typography>test</Typography>
+          </div>
+        </div>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
+      <CardActions className="justify-center gap-40">
+        <Button
+          variant="contained"
+          startIcon={<EventAvailableIcon />}
+          onClick={reserve}>
+          ネット予約
+        </Button>
+        <Link href={`tel:${dentalData.tel}`}>
+          <a>
+            <Button variant="outlined" startIcon={<LocalPhoneIcon />}>
+              電話予約
+            </Button>
+          </a>
+        </Link>
       </CardActions>
     </Card>
   )

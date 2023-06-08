@@ -1,11 +1,9 @@
 import Head from 'next/head'
+
 import Header from '@/components/Parts/Template/Header'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
 import Template from '@/components/Templates/Dental/Index'
 
 export default function Home() {
-  const router = useRouter()
   return (
     <>
       <Head>
