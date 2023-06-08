@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import ReserveDateTable from '@/components/Parts/Organisms/Reserve/ReserveDateTable'
 const Index = props => {
-  const { dental } = props
+  const { dental, dates } = props
   return (
     <>
       <HeadPaper dental={dental} />
@@ -70,13 +70,19 @@ const Index = props => {
             <div className="bg-iceberg text-c p1 mt1">
               <Typography variant="bold">予約日時</Typography>
             </div>
-            <ReserveDateTable />
+            <ReserveDateTable dates={dates} />
           </Paper>
         </Grid>
         <Grid item xs={12} md={4} lg={4} className="relative">
-          <Paper className="confirm-pc">
+          <Paper className="confirm-pc p1">
             <div className="bg-iceberg text-c">
               <Typography variant="bold">入力内容の確認</Typography>
+            </div>
+            <div className="bg-iceberg mt1">
+              <Typography variant="bold">当院での受診</Typography>
+            </div>
+            <div className="mt1">
+              <Typography variant="body1">初めて</Typography>
             </div>
           </Paper>
         </Grid>

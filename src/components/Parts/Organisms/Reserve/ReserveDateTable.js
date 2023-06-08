@@ -20,6 +20,7 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ]
 const ReserveDateTable = props => {
+  const { dates } = props
   return (
     <>
       <div className="flex justify-space mt1 mb1">
@@ -45,19 +46,24 @@ const ReserveDateTable = props => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow
-                key={row.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell align="center">○</TableCell>
-                <TableCell align="center">×</TableCell>
-                <TableCell align="center">○</TableCell>
-                <TableCell align="center">○</TableCell>
-                <TableCell align="center">○</TableCell>
-                <TableCell align="center">○</TableCell>
-                <TableCell align="center">○</TableCell>
-              </TableRow>
-            ))}
+            {dates.map((date, index) => {
+              return (
+                <TableRow
+                  key={index}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                  <TableCell align="center">
+                    {date[0]?.date}
+                    <br />○
+                  </TableCell>
+                  <TableCell align="center">{date[1]?.date}</TableCell>
+                  <TableCell align="center">{date[2]?.date}</TableCell>
+                  <TableCell align="center">{date[3]?.date}</TableCell>
+                  <TableCell align="center">{date[4]?.date}</TableCell>
+                  <TableCell align="center">{date[5]?.date}</TableCell>
+                  <TableCell align="center">{date[6]?.date}</TableCell>
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       </TableContainer>

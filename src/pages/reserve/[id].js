@@ -8,12 +8,14 @@ import Header from '@/components/Parts/Template/Header'
 const reserve = () => {
   const router = useRouter()
   const [dental, setDental] = useState(null)
+  const [dates, seDates] = useState(null)
   useEffect(() => {
     ;(async () => {
       if (!router.isReady) return
       const id = router.query.id
       const res = await axios.post('/api/portal/dental/detail', { id })
       setDental(res.data.dental)
+      seDates(res.data.dates)
       console.log(res)
     })()
   }, [router.asPath])
@@ -30,7 +32,7 @@ const reserve = () => {
         <Header />
         <div className="manage-container mt-header">
           <div className="content-wrap-1000">
-            {dental && <Template dental={dental} />}
+            {dental && dates && <Template dental={dental} dates={dates} />}
           </div>
         </div>
       </>
