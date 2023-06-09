@@ -10,11 +10,19 @@ const reserve = () => {
   const [dental, setDental] = useState(null)
   const [dates, setDates] = useState(null)
   const [examination, setExamination] = useState('')
+  const [sex, setSex] = useState('')
   const [medicalHopeId, setMedicalHopeId] = useState('')
   const [calendarDisplayYM, setCalendarDisplayYM] = useState('')
   const [nextDate, setNextDate] = useState('')
   const [prevDate, setPrevDate] = useState('')
   const [minDate, setMinDate] = useState('')
+  const [maxDate, setMaxDate] = useState('')
+  const [year, setYear] = useState('')
+  const [month, setMonth] = useState('')
+  const [day, setDay] = useState('')
+  const [reserveDay, setReserveDay] = useState('')
+  const [dayList, setDayList] = useState(null)
+  const [reserveTime, setReserveTime] = useState('')
   useEffect(() => {
     ;(async () => {
       if (!router.isReady) return
@@ -36,6 +44,8 @@ const reserve = () => {
       setNextDate(res.data.next_date)
       setPrevDate(res.data.prev_date)
       setMinDate(res.data.min_date)
+      setMaxDate(res.data.max_date)
+      setDayList(res.data.date_list)
     })()
   }, [medicalHopeId])
   const dateChange = async kind => {
@@ -50,6 +60,7 @@ const reserve = () => {
     setCalendarDisplayYM(res.data.display_ym)
     setNextDate(res.data.next_date)
     setPrevDate(res.data.prev_date)
+    setDayList(res.data.date_list)
   }
   return (
     <>
@@ -70,11 +81,26 @@ const reserve = () => {
                 dates={dates}
                 examination={examination}
                 setExamination={setExamination}
+                sex={sex}
+                setSex={setSex}
                 medicalHopeId={medicalHopeId}
                 setMedicalHopeId={setMedicalHopeId}
                 calendarDisplayYM={calendarDisplayYM}
                 dateChange={dateChange}
                 minDate={minDate}
+                maxDate={maxDate}
+                year={year}
+                setYear={setYear}
+                month={month}
+                setMonth={setMonth}
+                day={day}
+                setDay={setDay}
+                reserveDay={reserveDay}
+                setReserveDay={setReserveDay}
+                dayList={dayList}
+                setDayList={setDayList}
+                reserveTime={reserveTime}
+                setReserveTime={setReserveTime}
               />
             )}
           </div>

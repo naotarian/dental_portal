@@ -8,14 +8,29 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
+
 const ReserveDateTable = props => {
-  const { dates, calendarDisplayYM, dateChange, minDate } = props
+  const {
+    dates,
+    calendarDisplayYM,
+    dateChange,
+    minDate,
+    maxDate,
+    reserveDay,
+    setReserveDay,
+    dayList,
+    setDayList,
+    reserveTime,
+    setReserveTime,
+  } = props
   const cal = date => {
     return [...Array(7)].map((_, i) => {
       if (date[i].is_past) {
         return (
           <TableCell
+            key={i}
             align="center"
+            className="p-x10-y4"
             style={{
               background: '#f5f5f5',
               borderRight: '1px solid #ddd',
@@ -28,13 +43,26 @@ const ReserveDateTable = props => {
       return (
         <TableCell
           align="center"
-          style={{ borderRight: '1px solid #ddd', color: date[i].color }}>
-          {date[i]?.date}
-          <br />
-          {date[i].is_closed ? '休' : '⚪︎'}
+          className="p-x10-y4"
+          key={i}
+          style={{
+            borderRight: '1px solid #ddd',
+            color: date[i].color,
+          }}>
+          <Button
+            style={{ color: date[i].color, fontWeight: 'bold' }}
+            onClick={() => reserveDateSelect(date[i]?.day)}>
+            {date[i]?.date}
+            <br />
+            {date[i].is_closed ? '休' : '⚪︎'}
+          </Button>
         </TableCell>
       )
     })
+  }
+  const reserveDateSelect = day => {
+    setReserveTime('')
+    setReserveDay(day)
   }
   return (
     <>
@@ -46,7 +74,10 @@ const ReserveDateTable = props => {
           前月
         </Button>
         <Typography variant="bold">{calendarDisplayYM}</Typography>
-        <Button variant="outlined" onClick={() => dateChange('next')}>
+        <Button
+          variant="outlined"
+          onClick={() => dateChange('next')}
+          disabled={maxDate === calendarDisplayYM}>
           翌月
         </Button>
       </div>
@@ -54,27 +85,27 @@ const ReserveDateTable = props => {
         <Table sx={{ maxWidth: 650 }} className="b-gray">
           <TableHead>
             <TableRow>
-              <TableCell align="center" className="border-r-gray">
+              <TableCell align="center" className="border-r-gray p-x10-y4">
                 月
               </TableCell>
-              <TableCell align="center" className="border-r-gray">
+              <TableCell align="center" className="border-r-gray p-x10-y4">
                 火
               </TableCell>
-              <TableCell align="center" className="border-r-gray">
+              <TableCell align="center" className="border-r-gray p-x10-y4">
                 水
               </TableCell>
-              <TableCell align="center" className="border-r-gray">
+              <TableCell align="center" className="border-r-gray p-x10-y4">
                 木
               </TableCell>
-              <TableCell align="center" className="border-r-gray">
+              <TableCell align="center" className="border-r-gray p-x10-y4">
                 金
               </TableCell>
               <TableCell
                 align="center"
-                className="border-r-gray color-saturday">
+                className="border-r-gray color-saturday p-x10-y4">
                 土
               </TableCell>
-              <TableCell align="center" className="color-sunday">
+              <TableCell align="center" className="color-sunday p-x10-y4">
                 日
               </TableCell>
             </TableRow>
@@ -92,6 +123,25 @@ const ReserveDateTable = props => {
           </TableBody>
         </Table>
       </TableContainer>
+      {reserveDay && (
+        <div className="mt2">
+          <div className="bg-iceberg text-c p1 mt1 mb1">
+            <Typography variant="bold">時間を選択してください。</Typography>
+          </div>
+          <div className="flex gap-20 flex-wrap ">
+            {dayList?.map((data, index) => (
+              <Button
+                key={index}
+                variant={data === reserveTime ? 'contained' : 'outlined'}
+                onClick={() => {
+                  setReserveTime(data)
+                }}>
+                {data}
+              </Button>
+            ))}
+          </div>
+        </div>
+      )}
     </>
   )
 }
