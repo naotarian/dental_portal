@@ -54,7 +54,7 @@ const Index = props => {
                   setExamination(e.target.value)
                 }}
               />
-              <label htmlFor="new" className="btnRadioLabel wi45">
+              <label htmlFor="new" className="btnRadioLabel wi45 bold">
                 初めて
               </label>
               <input
