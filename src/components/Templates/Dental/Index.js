@@ -53,7 +53,7 @@ const Index = () => {
                       <Typography variant="largeBold">エリア・駅</Typography>
                     </div>
                     {regions.map((data, index) => (
-                      <>
+                      <React.Fragment key={index}>
                         <div className="mb05 mt1">
                           <Typography key={index} variant="bold">
                             {data.region_name}
@@ -66,7 +66,7 @@ const Index = () => {
                             </Typography>
                           ))}
                         </div>
-                      </>
+                      </React.Fragment>
                     ))}
                   </React.Fragment>
                 }>

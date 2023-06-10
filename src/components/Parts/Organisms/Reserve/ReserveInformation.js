@@ -8,7 +8,6 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 const ReserveInformation = props => {
   const {
-    sex,
     setSex,
     year,
     setYear,
@@ -16,7 +15,14 @@ const ReserveInformation = props => {
     setMonth,
     day,
     setDay,
-    reserveTime,
+    setLastNameKana,
+    setFirstNameKana,
+    setFirstName,
+    setLastName,
+    setEmail,
+    setMobile,
+    setFixed,
+    setRemark,
   } = props
   const yearChange = event => {
     setYear(event.target.value)
@@ -82,12 +88,36 @@ const ReserveInformation = props => {
           lg={9}
           className="p1 gap-20 bl-gray-pc bb-gray">
           <div className="flex gap-20 mb1">
-            <TextField label="姓" size="small" />
-            <TextField label="名" size="small" />
+            <TextField
+              label="姓"
+              size="small"
+              onChange={e => {
+                setLastName(e.target.value)
+              }}
+            />
+            <TextField
+              label="名"
+              size="small"
+              onChange={e => {
+                setFirstName(e.target.value)
+              }}
+            />
           </div>
           <div className="flex gap-20">
-            <TextField label="姓(フリガナ)" size="small" />
-            <TextField label="名(フリガナ)" size="small" />
+            <TextField
+              label="姓(フリガナ)"
+              size="small"
+              onChange={e => {
+                setLastNameKana(e.target.value)
+              }}
+            />
+            <TextField
+              label="名(フリガナ)"
+              size="small"
+              onChange={e => {
+                setFirstNameKana(e.target.value)
+              }}
+            />
           </div>
         </Grid>
         <Grid item xs={12} md={3} lg={3} className="p1 bb-gray">
@@ -100,7 +130,14 @@ const ReserveInformation = props => {
           md={9}
           lg={9}
           className="p1 gap-20 bl-gray-pc bb-gray">
-          <TextField label="メールアドレス" size="small" fullWidth />
+          <TextField
+            label="メールアドレス"
+            size="small"
+            fullWidth
+            onChange={e => {
+              setEmail(e.target.value)
+            }}
+          />
         </Grid>
         <Grid item xs={12} md={3} lg={3} className="p1 bb-gray">
           <Typography variant="bold">電話番号</Typography>
@@ -112,8 +149,23 @@ const ReserveInformation = props => {
           md={9}
           lg={9}
           className="p1 gap-20 bl-gray-pc  bb-gray">
-          <TextField label="携帯電話" size="small" fullWidth className="mb1" />
-          <TextField label="固定電話" size="small" fullWidth />
+          <TextField
+            label="携帯電話"
+            size="small"
+            fullWidth
+            className="mb1"
+            onChange={e => {
+              setMobile(e.target.value)
+            }}
+          />
+          <TextField
+            label="固定電話"
+            size="small"
+            fullWidth
+            onChange={e => {
+              setFixed(e.target.value)
+            }}
+          />
         </Grid>
         <Grid item xs={12} md={3} lg={3} className="p1 bb-gray">
           <Typography variant="bold">生年月日</Typography>
@@ -182,6 +234,26 @@ const ReserveInformation = props => {
               男性
             </label>
           </div>
+        </Grid>
+        <Grid item xs={12} md={3} lg={3} className="p1 bb-gray">
+          <Typography variant="bold">備考</Typography>
+          <span className="any">任意</span>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={9}
+          lg={9}
+          className="p1 gap-20 bl-gray-pc  bb-gray">
+          <TextField
+            fullWidth
+            multiline
+            rows={4}
+            placeholder="歯科医師に事前にお伝えしたいことがあればご記入ください。"
+            onChange={e => {
+              setRemark(e.target.value)
+            }}
+          />
         </Grid>
       </Grid>
     </>

@@ -17,9 +17,19 @@ const reserve = () => {
   const [prevDate, setPrevDate] = useState('')
   const [minDate, setMinDate] = useState('')
   const [maxDate, setMaxDate] = useState('')
+  // 患者様情報の入力
   const [year, setYear] = useState('')
   const [month, setMonth] = useState('')
   const [day, setDay] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [lastNameKana, setLastNameKana] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [firstNameKana, setFirstNameKana] = useState('')
+  const [email, setEmail] = useState('')
+  const [mobile, setMobile] = useState('')
+  const [fixed, setFixed] = useState('')
+  const [remark, setRemark] = useState('')
+
   const [reserveDay, setReserveDay] = useState('')
   const [dayList, setDayList] = useState(null)
   const [reserveTime, setReserveTime] = useState('')
@@ -64,48 +74,62 @@ const reserve = () => {
   }
   return (
     <>
-      <>
-        <Head>
-          <title>Dentalドットコム | 歯科医院一覧</title>
-          <link
-            href="https://fonts.googleapis.com/css?family=Noto+Sans"
-            rel="stylesheet"
-          />
-        </Head>
-        <Header />
-        <div className="manage-container mt-header">
-          <div className="content-wrap-1000">
-            {dental && (
-              <Template
-                dental={dental}
-                dates={dates}
-                examination={examination}
-                setExamination={setExamination}
-                sex={sex}
-                setSex={setSex}
-                medicalHopeId={medicalHopeId}
-                setMedicalHopeId={setMedicalHopeId}
-                calendarDisplayYM={calendarDisplayYM}
-                dateChange={dateChange}
-                minDate={minDate}
-                maxDate={maxDate}
-                year={year}
-                setYear={setYear}
-                month={month}
-                setMonth={setMonth}
-                day={day}
-                setDay={setDay}
-                reserveDay={reserveDay}
-                setReserveDay={setReserveDay}
-                dayList={dayList}
-                setDayList={setDayList}
-                reserveTime={reserveTime}
-                setReserveTime={setReserveTime}
-              />
-            )}
-          </div>
+      <Head>
+        <title>Dentalドットコム | 歯科医院一覧</title>
+        <link
+          href="https://fonts.googleapis.com/css?family=Noto+Sans"
+          rel="stylesheet"
+        />
+      </Head>
+      <Header />
+      <div className="manage-container mt-header">
+        <div className="content-wrap-1000">
+          {dental && (
+            <Template
+              dental={dental}
+              dates={dates}
+              examination={examination}
+              setExamination={setExamination}
+              sex={sex}
+              setSex={setSex}
+              medicalHopeId={medicalHopeId}
+              setMedicalHopeId={setMedicalHopeId}
+              calendarDisplayYM={calendarDisplayYM}
+              dateChange={dateChange}
+              minDate={minDate}
+              maxDate={maxDate}
+              year={year}
+              setYear={setYear}
+              month={month}
+              setMonth={setMonth}
+              day={day}
+              setDay={setDay}
+              reserveDay={reserveDay}
+              setReserveDay={setReserveDay}
+              dayList={dayList}
+              setDayList={setDayList}
+              reserveTime={reserveTime}
+              setReserveTime={setReserveTime}
+              setLastName={setLastName}
+              setFirstName={setFirstName}
+              setLastNameKana={setLastNameKana}
+              setFirstNameKana={setFirstNameKana}
+              lastName={lastName}
+              firstName={firstName}
+              lastNameKana={lastNameKana}
+              firstNameKana={firstNameKana}
+              email={email}
+              setEmail={setEmail}
+              mobile={mobile}
+              setMobile={setMobile}
+              fixed={fixed}
+              setFixed={setFixed}
+              remark={remark}
+              setRemark={setRemark}
+            />
+          )}
         </div>
-      </>
+      </div>
     </>
   )
 }

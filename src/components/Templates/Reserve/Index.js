@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import HeadPaper from '@/components/Parts/Organisms/Reserve/HeadPaper'
 import { Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
@@ -32,16 +32,34 @@ const Index = props => {
     setDayList,
     reserveTime,
     setReserveTime,
+    setLastNameKana,
+    setFirstNameKana,
+    setFirstName,
+    setLastName,
+    lastName,
+    firstName,
+    lastNameKana,
+    firstNameKana,
+    email,
+    setEmail,
+    mobile,
+    setMobile,
+    fixed,
+    setFixed,
+    remark,
+    setRemark,
   } = props
   const [dateSelect, setDateSelect] = useState(false)
+  const scrollCalendarmRef = useRef(null)
   return (
     <>
       <HeadPaper dental={dental} />
       <Grid container spacing={2} className="relative">
         <Grid item xs={12} md={8} lg={8}>
           <Paper className="p1 br0">
-            <div className="bg-iceberg text-c p1">
+            <div className="bg-iceberg text-c p1 relative">
               <Typography variant="bold">当院での受診</Typography>
+              <span className="caption2">必須</span>
             </div>
             <div className="flex justify-around mt1">
               <input
@@ -71,8 +89,9 @@ const Index = props => {
                 2回目以降
               </label>
             </div>
-            <div className="bg-iceberg text-c p1 mt1">
+            <div className="bg-iceberg text-c p1 mt1 relative">
               <Typography variant="bold">診療希望内容</Typography>
+              <span className="caption2">必須</span>
             </div>
             <div className="flex justify-around mt1 flex-wrap">
               {dental.treatments?.map((data, index) => (
@@ -108,8 +127,11 @@ const Index = props => {
             </Button>
             {dateSelect && (
               <>
-                <div className="bg-iceberg text-c p1 mt1">
+                <div
+                  className="bg-iceberg text-c p1 mt1 relative"
+                  id="calendar">
                   <Typography variant="bold">予約日時</Typography>
+                  <span className="caption2">必須</span>
                 </div>
                 <ReserveDateTable
                   dates={dates}
@@ -126,9 +148,9 @@ const Index = props => {
                 />
               </>
             )}
+            <div ref={scrollCalendarmRef}></div>
             {reserveDay && reserveTime && (
               <ReserveInformation
-                sex={sex}
                 setSex={setSex}
                 year={year}
                 setYear={setYear}
@@ -136,7 +158,15 @@ const Index = props => {
                 setMonth={setMonth}
                 day={day}
                 setDay={setDay}
-                reserveTime={reserveTime}
+                setLastName={setLastName}
+                setFirstName={setFirstName}
+                setLastNameKana={setLastNameKana}
+                setFirstNameKana={setFirstNameKana}
+                setEmail={setEmail}
+                setMobile={setMobile}
+                setFixed={setFixed}
+                remark={remark}
+                setRemark={setRemark}
               />
             )}
           </Paper>
@@ -146,10 +176,10 @@ const Index = props => {
             <div className="bg-iceberg text-c">
               <Typography variant="bold">入力内容の確認</Typography>
             </div>
-            <div className="bg-iceberg mt1 pl1">
+            <div className="bg-iceberg mt05 pl1">
               <Typography variant="bold">当院での受診</Typography>
             </div>
-            <div className="mt1 pl1">
+            <div className="mt05 pl1">
               {examination && (
                 <>
                   {examination === 'new' ? (
@@ -160,10 +190,10 @@ const Index = props => {
                 </>
               )}
             </div>
-            <div className="bg-iceberg mt1 pl1">
+            <div className="bg-iceberg mt05 pl1">
               <Typography variant="bold">診療希望内容</Typography>
             </div>
-            <div className="mt1 pl1">
+            <div className="mt05 pl1">
               {medicalHopeId && (
                 <Typography>
                   {
@@ -174,19 +204,81 @@ const Index = props => {
                 </Typography>
               )}
             </div>
-            <div className="bg-iceberg mt1 pl1">
+            <div className="bg-iceberg mt05 pl1">
               <Typography variant="bold">ご予約の日付</Typography>
             </div>
-            <div className="mt1 pl1">
+            <div className="mt05 pl1">
               {reserveDay && <Typography>{reserveDay}</Typography>}
             </div>
-            <div className="bg-iceberg mt1 pl1">
+            <div className="bg-iceberg mt05 pl1">
               <Typography variant="bold">ご予約の時間</Typography>
             </div>
-            <div className="mt1 pl1">
+            <div className="mt05 pl1">
               {reserveTime && <Typography>{reserveTime} ~ </Typography>}
             </div>
-            <div className="mt1 text-c">
+            <div className="bg-iceberg mt05 pl1">
+              <Typography variant="bold">氏名</Typography>
+            </div>
+            <div className="mt05 pl1">
+              <Typography>
+                {lastName}
+                {firstName}
+              </Typography>
+            </div>
+            <div className="bg-iceberg mt05 pl1">
+              <Typography variant="bold">氏名(フリガナ )</Typography>
+            </div>
+            <div className="mt05 pl1">
+              <Typography>
+                {lastNameKana}
+                {firstNameKana}
+              </Typography>
+            </div>
+            <div className="bg-iceberg mt05 pl1">
+              <Typography variant="bold">メールアドレス</Typography>
+            </div>
+            <div className="mt05 pl1">
+              <Typography>{email}</Typography>
+            </div>
+            <div className="bg-iceberg mt05 pl1">
+              <Typography variant="bold">携帯電話番号</Typography>
+            </div>
+            <div className="mt05 pl1">
+              {mobile ? (
+                <Typography>{mobile}</Typography>
+              ) : (
+                <Typography>入力なし</Typography>
+              )}
+            </div>
+            <div className="bg-iceberg mt05 pl1">
+              <Typography variant="bold">固定電話番号</Typography>
+            </div>
+            <div className="mt05 pl1">
+              {fixed ? (
+                <Typography>{fixed}</Typography>
+              ) : (
+                <Typography>入力なし</Typography>
+              )}
+            </div>
+            <div className="bg-iceberg mt05 pl1">
+              <Typography variant="bold">生年月日</Typography>
+            </div>
+            <div className="mt05 pl1">
+              <Typography>
+                {year && year}年{month && month}月{day && day}日
+              </Typography>
+            </div>
+            <div className="bg-iceberg mt05 pl1">
+              <Typography variant="bold">備考</Typography>
+            </div>
+            <div className="mt05 pl1">
+              {remark ? (
+                <Typography>{remark}</Typography>
+              ) : (
+                <Typography>入力なし</Typography>
+              )}
+            </div>
+            <div className="mt05 text-c">
               <Button variant="contained">上記の内容で予約を確定する</Button>
             </div>
           </Paper>

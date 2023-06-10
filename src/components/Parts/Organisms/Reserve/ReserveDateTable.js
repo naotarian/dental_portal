@@ -30,7 +30,7 @@ const ReserveDateTable = props => {
           <TableCell
             key={i}
             align="center"
-            className="p-x10-y4"
+            className="min-10 p-x10-y4"
             style={{
               background: '#f5f5f5',
               borderRight: '1px solid #ddd',
@@ -51,6 +51,8 @@ const ReserveDateTable = props => {
           }}>
           <Button
             style={{ color: date[i].color, fontWeight: 'bold' }}
+            className="min-10 p0"
+            disabled={date[i].is_closed}
             onClick={() => reserveDateSelect(date[i]?.day)}>
             {date[i]?.date}
             <br />
@@ -125,8 +127,9 @@ const ReserveDateTable = props => {
       </TableContainer>
       {reserveDay && (
         <div className="mt2">
-          <div className="bg-iceberg text-c p1 mt1 mb1">
+          <div className="bg-iceberg text-c p1 mt1 mb1 relative">
             <Typography variant="bold">時間を選択してください。</Typography>
+            <span className="caption2">必須</span>
           </div>
           <div className="flex gap-20 flex-wrap ">
             {dayList?.map((data, index) => (
