@@ -6,6 +6,8 @@ import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import ReserveDateTable from '@/components/Parts/Organisms/Reserve/ReserveDateTable'
 import ReserveInformation from '@/components/Parts/Organisms/Reserve/ReserveInformation'
+import Alert from '@mui/material/Alert'
+import Stack from '@mui/material/Stack'
 const Index = props => {
   const {
     dental,
@@ -48,11 +50,27 @@ const Index = props => {
     setFixed,
     remark,
     setRemark,
+    submit,
+    errors,
+    setReserveDayYmd,
   } = props
   const [dateSelect, setDateSelect] = useState(false)
   const scrollCalendarmRef = useRef(null)
+  const err = () => {
+    if (errors) {
+      return errors.map((data, i) => {
+        return (
+          <Stack sx={{ width: '100%' }} spacing={2} className="mb05">
+            <Alert severity="error">{data}</Alert>
+          </Stack>
+        )
+      })
+    }
+  }
+
   return (
     <>
+      {err()}
       <HeadPaper dental={dental} />
       <Grid container spacing={2} className="relative">
         <Grid item xs={12} md={8} lg={8}>
@@ -145,6 +163,7 @@ const Index = props => {
                   setDayList={setDayList}
                   reserveTime={reserveTime}
                   setReserveTime={setReserveTime}
+                  setReserveDayYmd={setReserveDayYmd}
                 />
               </>
             )}
@@ -269,6 +288,14 @@ const Index = props => {
               </Typography>
             </div>
             <div className="bg-iceberg mt05 pl1">
+              <Typography variant="bold">性別</Typography>
+            </div>
+            <div className="mt05 pl1">
+              <Typography>
+                {!sex ? '選択なし' : sex === 'women' ? '女性' : '男性'}
+              </Typography>
+            </div>
+            <div className="bg-iceberg mt05 pl1">
               <Typography variant="bold">備考</Typography>
             </div>
             <div className="mt05 pl1">
@@ -279,7 +306,9 @@ const Index = props => {
               )}
             </div>
             <div className="mt05 text-c">
-              <Button variant="contained">上記の内容で予約を確定する</Button>
+              <Button variant="contained" onClick={submit}>
+                上記の内容で予約を確定する
+              </Button>
             </div>
           </Paper>
         </Grid>

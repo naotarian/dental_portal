@@ -7,20 +7,22 @@ import Head from 'next/head'
 import Header from '@/components/Parts/Template/Header'
 const reserve = () => {
   const router = useRouter()
+  const [manageId, setManageId] = useState('')
   const [dental, setDental] = useState(null)
   const [dates, setDates] = useState(null)
-  const [examination, setExamination] = useState('')
-  const [sex, setSex] = useState('')
-  const [medicalHopeId, setMedicalHopeId] = useState('')
   const [calendarDisplayYM, setCalendarDisplayYM] = useState('')
   const [nextDate, setNextDate] = useState('')
   const [prevDate, setPrevDate] = useState('')
   const [minDate, setMinDate] = useState('')
   const [maxDate, setMaxDate] = useState('')
+  const [dayList, setDayList] = useState(null)
   // 患者様情報の入力
   const [year, setYear] = useState('')
   const [month, setMonth] = useState('')
   const [day, setDay] = useState('')
+  const [examination, setExamination] = useState('')
+  const [sex, setSex] = useState('')
+  const [medicalHopeId, setMedicalHopeId] = useState('')
   const [lastName, setLastName] = useState('')
   const [lastNameKana, setLastNameKana] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -29,14 +31,16 @@ const reserve = () => {
   const [mobile, setMobile] = useState('')
   const [fixed, setFixed] = useState('')
   const [remark, setRemark] = useState('')
-
   const [reserveDay, setReserveDay] = useState('')
-  const [dayList, setDayList] = useState(null)
   const [reserveTime, setReserveTime] = useState('')
+  const [reserveDayYmd, setReserveDayYmd] = useState('')
+  //validationMessage
+  const [errors, setErrors] = useState(null)
   useEffect(() => {
     ;(async () => {
       if (!router.isReady) return
       const id = router.query.id
+      setManageId(id)
       const res = await axios.post('/api/portal/dental/detail', { id })
       setDental(res.data.dental)
     })()
@@ -71,6 +75,36 @@ const reserve = () => {
     setNextDate(res.data.next_date)
     setPrevDate(res.data.prev_date)
     setDayList(res.data.date_list)
+  }
+  const submit = async () => {
+    try {
+      const sendData = {
+        manageId,
+        examination,
+        sex,
+        medicalHopeId,
+        year,
+        month,
+        day,
+        lastName,
+        lastNameKana,
+        firstName,
+        firstNameKana,
+        email,
+        mobile,
+        fixed,
+        remark,
+        reserveDay,
+        reserveTime,
+        reserveDayYmd,
+      }
+      setErrors(null)
+      const res = await axios.post('/api/portal/reserve/regist', sendData)
+      router.push('/reserve/complate')
+    } catch (error) {
+      setErrors(error.response.data.errors)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
   return (
     <>
@@ -126,6 +160,9 @@ const reserve = () => {
               setFixed={setFixed}
               remark={remark}
               setRemark={setRemark}
+              submit={submit}
+              errors={errors}
+              setReserveDayYmd={setReserveDayYmd}
             />
           )}
         </div>

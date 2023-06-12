@@ -22,6 +22,7 @@ const ReserveDateTable = props => {
     setDayList,
     reserveTime,
     setReserveTime,
+    setReserveDayYmd,
   } = props
   const cal = date => {
     return [...Array(7)].map((_, i) => {
@@ -53,7 +54,7 @@ const ReserveDateTable = props => {
             style={{ color: date[i].color, fontWeight: 'bold' }}
             className="min-10 p0"
             disabled={date[i].is_closed}
-            onClick={() => reserveDateSelect(date[i]?.day)}>
+            onClick={() => reserveDateSelect(date[i]?.day, date[i]?.day_ymd)}>
             {date[i]?.date}
             <br />
             {date[i].is_closed ? '休' : '⚪︎'}
@@ -62,9 +63,10 @@ const ReserveDateTable = props => {
       )
     })
   }
-  const reserveDateSelect = day => {
+  const reserveDateSelect = (day, dayYmd) => {
     setReserveTime('')
     setReserveDay(day)
+    setReserveDayYmd(dayYmd)
   }
   return (
     <>
