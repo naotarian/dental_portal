@@ -6,7 +6,9 @@ const HeadPaper = props => {
     <Paper className="p1 mb1">
       <div>
         <Typography variant="h1">{dental.dental_name}</Typography>
-        <Typography variant="bold">{dental.selected_station.remark}</Typography>
+        <Typography variant="bold">
+          {dental.selected_station?.remark}
+        </Typography>
       </div>
       <div>
         <Typography variant="body1Red">
