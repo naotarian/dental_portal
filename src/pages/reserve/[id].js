@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
-import Template from '@/components/Templates/Reserve/Index'
-import { useRouter } from 'next/router'
-import axios from '@/lib/axios'
+
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import Header from '@/components/Parts/Template/Header'
+import Template from '@/components/Templates/Reserve/Index'
+import axios from '@/lib/axios'
+
 const reserve = () => {
   const router = useRouter()
   const [manageId, setManageId] = useState('')

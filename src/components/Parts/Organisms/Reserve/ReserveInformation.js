@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import Typography from '@mui/material/Typography'
+
+import FormControl from '@mui/material/FormControl'
 import Grid from '@mui/material/Grid'
-import TextField from '@mui/material/TextField'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 const ReserveInformation = props => {
   const {
     setSex,

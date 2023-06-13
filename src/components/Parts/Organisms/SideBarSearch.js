@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography'
 const SideBarSearch = props => {
-  const { title } = props
+  const { title, text } = props
   return (
     <>
       <div className="side-bar-search-card b-gray mb1 wi100">
@@ -8,7 +8,7 @@ const SideBarSearch = props => {
           <Typography variant="bold">{title}</Typography>
         </div>
         <div className="p1 text-c bg-white">
-          <Typography variant="bold">指定なし</Typography>
+          <Typography variant="bold">{text}</Typography>
         </div>
       </div>
     </>

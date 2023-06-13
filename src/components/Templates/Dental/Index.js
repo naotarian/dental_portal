@@ -10,6 +10,7 @@ import { styled } from '@mui/material/styles'
 import DentalCard from '@/components/Parts/Organisms/DentalCard'
 import SearchDialog from '@/components/Parts/Organisms/Dialog/SearchDialog'
 import SideBarSearch from '@/components/Parts/Organisms/SideBarSearch'
+import PrefectureChipArray from '@/components/Parts/Organisms/Reserve/PrefectureChipArray'
 import axios from '@/lib/axios'
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} placement="right" />
@@ -20,7 +21,6 @@ const HtmlTooltip = styled(({ className, ...props }) => (
     maxWidth: 1000,
     padding: '2rem',
     paddingTop: '1rem',
-    // fontSize: theme.typography.pxToRem(12),
     border: '1px solid #dadde9',
   },
 }))
@@ -31,14 +31,32 @@ const Index = () => {
   const SearchDialogOpen = () => setSearchDialogOpen(true)
   const SearchDialogClose = () => setSearchDialogOpen(false)
   const [regions, setRegions] = React.useState(null)
+  const [selectPrefecture, setSelectPrefecture] = React.useState([])
+  const defaultFetch = async () => {
+    const res = await axios.get('/api/portal/dental')
+    setRegions(res.data.regions)
+    setDentals(res.data.dentals)
+    setDataFetch(true)
+  }
   React.useEffect(() => {
     ;(async () => {
-      const res = await axios.get('/api/portal/dental')
-      setRegions(res.data.regions)
-      setDentals(res.data.dentals)
-      setDataFetch(true)
+      defaultFetch()
+      // const res = await axios.get('/api/portal/dental')
+      // setRegions(res.data.regions)
+      // setDentals(res.data.dentals)
+      // setDataFetch(true)
     })()
   }, [])
+  const prefectureChange = async (number, name) => {
+    const sendData = { number }
+    setSelectPrefecture([name])
+    const res = await axios.post('/api/portal/dental', sendData)
+    setDentals(res.data.dentals)
+  }
+  const prefectureClear = () => {
+    setSelectPrefecture([])
+    defaultFetch()
+  }
   return (
     <>
       {dataFetch && (
@@ -49,8 +67,21 @@ const Index = () => {
                 className="p2"
                 title={
                   <React.Fragment>
-                    <div className="bb-gray">
+                    <div className="bb-gray flex justify-space pb1">
                       <Typography variant="largeBold">エリア・駅</Typography>
+                      <Button
+                        variant="outlined"
+                        disabled={selectPrefecture.length == 0}>
+                        市区町村
+                      </Button>
+                    </div>
+                    <div className="mb1 mt1 text-r">
+                      <Button
+                        variant="outlined"
+                        disabled={selectPrefecture.length == 0}
+                        onClick={prefectureClear}>
+                        選択をクリア
+                      </Button>
                     </div>
                     {regions.map((data, index) => (
                       <React.Fragment key={index}>
@@ -62,7 +93,13 @@ const Index = () => {
                         <div className="flex gap-20">
                           {data.prefectures.map((data2, index2) => (
                             <Typography className="white-noerap" key={index2}>
-                              <Button variant="text">{data2.name}</Button>
+                              <Button
+                                variant="text"
+                                onClick={() =>
+                                  prefectureChange(data2.id, data2.name)
+                                }>
+                                {data2.name}
+                              </Button>
                             </Typography>
                           ))}
                         </div>
@@ -71,7 +108,14 @@ const Index = () => {
                   </React.Fragment>
                 }>
                 <Button className="wi100 p0">
-                  <SideBarSearch title="エリア・駅" />
+                  <SideBarSearch
+                    title="エリア・駅"
+                    text={
+                      selectPrefecture.length > 0
+                        ? selectPrefecture
+                        : '指定なし'
+                    }
+                  />
                 </Button>
               </HtmlTooltip>
               <HtmlTooltip
@@ -103,9 +147,16 @@ const Index = () => {
               </HtmlTooltip>
             </Grid>
             <Grid item xs={12} md={12} lg={8}>
-              <div className="mb1">
-                <Typography variant="bold">【土曜診療】</Typography>
-              </div>
+              {selectPrefecture.length > 0 && (
+                <div className="mb1">
+                  <PrefectureChipArray
+                    array={selectPrefecture}
+                    setSelectPrefecture={setSelectPrefecture}
+                    defaultFetch={defaultFetch}
+                  />
+                  {/* <ChipArray /> */}
+                </div>
+              )}
               <SearchDialog
                 searchDialogOpen={searchDialogOpen}
                 SearchDialogClose={SearchDialogClose}

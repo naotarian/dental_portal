@@ -1,13 +1,17 @@
 import React, { useState, useRef } from 'react'
-import HeadPaper from '@/components/Parts/Organisms/Reserve/HeadPaper'
-import { Typography } from '@mui/material'
+
+import Alert from '@mui/material/Alert'
+import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
-import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
+
+import { Typography } from '@mui/material'
+
+import HeadPaper from '@/components/Parts/Organisms/Reserve/HeadPaper'
 import ReserveDateTable from '@/components/Parts/Organisms/Reserve/ReserveDateTable'
 import ReserveInformation from '@/components/Parts/Organisms/Reserve/ReserveInformation'
-import Alert from '@mui/material/Alert'
-import Stack from '@mui/material/Stack'
+
 const Index = props => {
   const {
     dental,
@@ -167,7 +171,7 @@ const Index = props => {
                 />
               </>
             )}
-            <div ref={scrollCalendarmRef}></div>
+            <div ref={scrollCalendarmRef} />
             {reserveDay && reserveTime && (
               <ReserveInformation
                 setSex={setSex}
