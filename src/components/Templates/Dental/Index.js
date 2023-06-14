@@ -11,6 +11,9 @@ import DentalCard from '@/components/Parts/Organisms/DentalCard'
 import SearchDialog from '@/components/Parts/Organisms/Dialog/SearchDialog'
 import SideBarSearch from '@/components/Parts/Organisms/SideBarSearch'
 import PrefectureChipArray from '@/components/Parts/Organisms/Reserve/PrefectureChipArray'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
 import axios from '@/lib/axios'
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} placement="right" />
@@ -31,11 +34,14 @@ const Index = () => {
   const SearchDialogOpen = () => setSearchDialogOpen(true)
   const SearchDialogClose = () => setSearchDialogOpen(false)
   const [regions, setRegions] = React.useState(null)
+  const [categories, setCategories] = React.useState(null)
   const [selectPrefecture, setSelectPrefecture] = React.useState([])
   const defaultFetch = async () => {
     const res = await axios.get('/api/portal/dental')
+    console.log(res)
     setRegions(res.data.regions)
     setDentals(res.data.dentals)
+    setCategories(res.data.categories)
     setDataFetch(true)
   }
   React.useEffect(() => {
@@ -118,21 +124,33 @@ const Index = () => {
                   />
                 </Button>
               </HtmlTooltip>
-              <HtmlTooltip
-                title={
-                  <React.Fragment>
-                    <Typography color="inherit">Tooltip with HTML</Typography>
-                    {regions.map((data, index) => (
-                      <Typography color="inherit" key={index}>
-                        Tooltip with HTML
-                      </Typography>
-                    ))}
-                  </React.Fragment>
-                }>
-                <Button className="wi100 p0">
-                  <SideBarSearch title="治療内容" />
-                </Button>
-              </HtmlTooltip>
+              <div className="side-bar-search-card b-gray mb1 wi100">
+                <div className="text-c bg-iceberg p1">
+                  <Typography variant="bold">診療内容</Typography>
+                </div>
+                <div className="p1 bg-white">
+                  {categories.map((data, index) => (
+                    <React.Fragment key={index}>
+                      <div className="mb05 mt1">
+                        <Typography key={index} variant="bold">
+                          {data.title}
+                        </Typography>
+                      </div>
+                      <div className="flex flex-wrap">
+                        {data.children.map((data2, index2) => (
+                          <FormGroup key={index2}>
+                            <FormControlLabel
+                              control={<Checkbox />}
+                              label={data2.title}
+                            />
+                          </FormGroup>
+                        ))}
+                      </div>
+                    </React.Fragment>
+                  ))}
+                  <Typography variant="bold">aa</Typography>
+                </div>
+              </div>
               <HtmlTooltip
                 title={
                   <React.Fragment>
@@ -154,7 +172,6 @@ const Index = () => {
                     setSelectPrefecture={setSelectPrefecture}
                     defaultFetch={defaultFetch}
                   />
-                  {/* <ChipArray /> */}
                 </div>
               )}
               <SearchDialog
