@@ -1,14 +1,9 @@
 import * as React from 'react'
-import { styled } from '@mui/material/styles'
-import Chip from '@mui/material/Chip'
-import Paper from '@mui/material/Paper'
 
-const ListItem = styled('li')(({ theme }) => ({
-  margin: theme.spacing(0.5),
-}))
+import Chip from '@mui/material/Chip'
 
 export default function PrefectureChipArray(props) {
-  const { array, setSelectPrefecture, defaultFetch } = props
+  const { array, setSelectPrefecture, defaultFetch, prefectures } = props
 
   const handleDelete = chipToDelete => () => {
     setSelectPrefecture([])
@@ -18,7 +13,14 @@ export default function PrefectureChipArray(props) {
   return (
     <>
       {array.map((data, index) => {
-        return <Chip label={data} onDelete={handleDelete(data)} />
+        const prefecture = prefectures.filter(c => c.id === data)
+        return (
+          <Chip
+            label={prefecture[0].name}
+            onDelete={handleDelete(data)}
+            key={index}
+          />
+        )
       })}
     </>
   )
