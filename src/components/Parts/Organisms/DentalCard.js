@@ -13,6 +13,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 const DentalCard = ({ ...data }) => {
   const dentalData = data.data
+  console.log(dentalData)
   const router = useRouter()
   const reserve = () => {
     router.push(`/reserve/${dentalData.id}`)
@@ -29,8 +30,8 @@ const DentalCard = ({ ...data }) => {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           adjective
         </Typography>
-        <div className="mt1 mb1 flex gap-40">
-          <div style={{ width: '200px', height: '150px' }}>
+        <div className="mt1 mb1 flex gap-40-pc gap-10-sp">
+          <div className="min-wi-150-sp min-wi-200-tb-pc he-150">
             <img
               src="/images/testSambnail.jpg"
               alt="テストサムネイル"
@@ -38,7 +39,11 @@ const DentalCard = ({ ...data }) => {
             />
           </div>
           <div>
-            <Typography>test</Typography>
+            <Typography>
+              {dentalData?.medical_treatments?.map((data, index) => (
+                <React.Fragment key={index}>{data.title}</React.Fragment>
+              ))}
+            </Typography>
             <Typography>test</Typography>
             <Typography>test</Typography>
           </div>

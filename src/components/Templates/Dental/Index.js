@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Grid from '@mui/material/Grid'
 
+import DentalCard from '@/components/Parts/Organisms/DentalCard'
+import SearchDialog from '@/components/Parts/Organisms/Dialog/SearchDialog'
+import PrefectureChipArray from '@/components/Parts/Organisms/Reserve/PrefectureChipArray'
+import SelectTreatChipArray from '@/components/Parts/Organisms/Reserve/SelectTreatChipArray'
 import SideSearchArea from '@/components/Parts/Organisms/Reserve/SideSearchArea'
 import axios from '@/lib/axios'
-
 const Index = () => {
   const [dataFetch, setDataFetch] = useState(false)
   const [searchDialogOpen, setSearchDialogOpen] = useState(false)
@@ -15,8 +20,8 @@ const Index = () => {
   const [categories, setCategories] = useState(null)
   const [prefectures, setPrefectures] = useState(null)
   const [childCategories, setChildCategories] = useState(null)
-  const [selectPrefecture, setSelectPrefecture] = useState([10])
-  const [checkTreat, setCheckTreat] = useState([1])
+  const [selectPrefecture, setSelectPrefecture] = useState([])
+  const [checkTreat, setCheckTreat] = useState([])
   const defaultFetch = async (treat, prefecture) => {
     const sendData = { treat, prefecture }
     const res = await axios.post('/api/portal/dental', sendData)
@@ -55,24 +60,60 @@ const Index = () => {
     <>
       {dataFetch && (
         <Box sx={{ flexGrow: 1 }} className="mt1">
-          <SideSearchArea
-            defaultFetch={defaultFetch}
-            selectPrefecture={selectPrefecture}
-            prefectureClear={prefectureClear}
-            regions={regions}
-            prefectures={prefectures}
-            categories={categories}
-            checkTreat={checkTreat}
-            setSelectPrefecture={setSelectPrefecture}
-            setCheckTreat={setCheckTreat}
-            childCategories={childCategories}
-            searchDialogOpen={searchDialogOpen}
-            SearchDialogClose={SearchDialogClose}
-            SearchDialogOpen={SearchDialogOpen}
-            dentals={dentals}
-            selectTreatChange={selectTreatChange}
-            prefectureChange={prefectureChange}
-          />
+          <Grid container spacing={8}>
+            <SideSearchArea
+              selectPrefecture={selectPrefecture}
+              prefectureClear={prefectureClear}
+              regions={regions}
+              prefectures={prefectures}
+              categories={categories}
+              checkTreat={checkTreat}
+              selectTreatChange={selectTreatChange}
+              prefectureChange={prefectureChange}
+            />
+            <Grid item xs={12} md={12} lg={8}>
+              {selectPrefecture.length > 0 && (
+                <div className="mb1">
+                  <PrefectureChipArray
+                    array={selectPrefecture}
+                    setSelectPrefecture={setSelectPrefecture}
+                    defaultFetch={defaultFetch}
+                    prefectures={prefectures}
+                  />
+                </div>
+              )}
+              {checkTreat.length > 0 && (
+                <div className="mb1">
+                  <SelectTreatChipArray
+                    array={checkTreat}
+                    setCheckTreat={setCheckTreat}
+                    childCategories={childCategories}
+                  />
+                </div>
+              )}
+              <SearchDialog
+                searchDialogOpen={searchDialogOpen}
+                SearchDialogClose={SearchDialogClose}
+              />
+              <div className="sp-only">
+                <div className="flex justify-around mb1">
+                  <Button variant="outlined" color="inherit" className="br0">
+                    現在地検索
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="inherit"
+                    className="br0"
+                    onClick={SearchDialogOpen}>
+                    詳細検索
+                  </Button>
+                </div>
+              </div>
+              {dentals?.map((data, index) => (
+                <DentalCard key={index} data={data} />
+              ))}
+            </Grid>
+          </Grid>
         </Box>
       )}
     </>

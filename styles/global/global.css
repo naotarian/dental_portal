@@ -529,3 +529,11 @@ a {
 .min-10 {
   min-width: 10px !important;
 }
+.cardSumbnailImg {
+  width: 100%;
+}
+@media screen and (max-width: 767px) {
+  .cardSumbnailImg {
+    width: 75%;
+  }
+}
