@@ -11,9 +11,10 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
+import ReserveCalrendarMini from '@/components/Parts/Organisms/Reserve/ReserveCalrendarMini'
 const DentalCard = ({ ...data }) => {
   const dentalData = data.data
-  console.log(dentalData)
   const router = useRouter()
   const reserve = () => {
     router.push(`/reserve/${dentalData.id}`)
@@ -39,15 +40,16 @@ const DentalCard = ({ ...data }) => {
             />
           </div>
           <div>
-            <Typography>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
               {dentalData?.medical_treatments?.map((data, index) => (
-                <React.Fragment key={index}>{data.title}</React.Fragment>
+                <React.Fragment key={index}>{data.title}/</React.Fragment>
               ))}
             </Typography>
             <Typography>test</Typography>
             <Typography>test</Typography>
           </div>
         </div>
+        <ReserveCalrendarMini dentalData={dentalData} />
       </CardContent>
       <CardActions className="justify-center gap-40">
         <Button

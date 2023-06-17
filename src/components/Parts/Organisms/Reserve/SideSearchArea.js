@@ -35,7 +35,7 @@ const SideSearchArea = props => {
     prefectureChange,
   } = props
   return (
-    <Grid item xs={4} className="pc-only">
+    <Grid item xs={4} md={4} lg={4} className="pc-only">
       <HtmlTooltip
         className="p2"
         title={

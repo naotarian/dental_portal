@@ -234,7 +234,7 @@ a {
   padding: 0 !important;
 }
 .p1 {
-  padding: 1rem;
+  padding: 1rem !important;
 }
 .p2 {
   padding: 2rem;
@@ -286,6 +286,9 @@ a {
 }
 .bb-gray {
   border-bottom: 1px solid #ddd;
+}
+.br-gray {
+  border-right: 1px solid #ddd !important;
 }
 @media screen and (max-width: 767px) {
   .bb-gray-sp {
