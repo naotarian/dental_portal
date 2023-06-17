@@ -110,7 +110,7 @@ const Index = () => {
                 </div>
               </div>
               {dentals?.map((data, index) => (
-                <DentalCard key={index} data={data} />
+                <DentalCard key={index} data={data} checkTreat={checkTreat} />
               ))}
             </Grid>
           </Grid>

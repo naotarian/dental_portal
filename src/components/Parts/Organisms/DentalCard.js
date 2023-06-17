@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
@@ -8,12 +6,13 @@ import Typography from '@mui/material/Typography'
 
 import EventAvailableIcon from '@mui/icons-material/EventAvailable'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
+import TrainIcon from '@mui/icons-material/Train'
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import ReserveCalrendarMini from '@/components/Parts/Organisms/Reserve/ReserveCalrendarMini'
-const DentalCard = ({ ...data }) => {
+const DentalCard = ({ checkTreat, ...data }) => {
   const dentalData = data.data
   const router = useRouter()
   const reserve = () => {
@@ -22,15 +21,16 @@ const DentalCard = ({ ...data }) => {
   return (
     <Card sx={{ minWidth: 275 }} className="mb1 br0 pointer dental-card">
       <CardContent>
-        <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-          {dentalData.selected_station?.remark}
-        </Typography>
+        <div className="flex">
+          <TrainIcon />
+          <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
+            {dentalData.selected_station?.remark}
+          </Typography>
+        </div>
         <Typography variant="largeBold" component="div">
           {dentalData.dental_name}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
-        </Typography>
+
         <div className="mt1 mb1 flex gap-40-pc gap-10-sp">
           <div className="min-wi-150-sp min-wi-200-tb-pc he-150">
             <img
@@ -40,13 +40,20 @@ const DentalCard = ({ ...data }) => {
             />
           </div>
           <div>
+            <Typography variant="bold" className="mb05">
+              対応している治療内容
+            </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
               {dentalData?.medical_treatments?.map((data, index) => (
-                <React.Fragment key={index}>{data.title}/</React.Fragment>
+                <span
+                  key={index}
+                  style={{
+                    color: checkTreat.includes(data.id) ? 'red' : '#333',
+                  }}>
+                  {data.title}/
+                </span>
               ))}
             </Typography>
-            <Typography>test</Typography>
-            <Typography>test</Typography>
           </div>
         </div>
         <ReserveCalrendarMini dentalData={dentalData} />

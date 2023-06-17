@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -9,16 +7,14 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein }
-}
-
-const rows = [createData('Frozen yoghurt', 159, 6.0, 24, 4.0)]
 const ReserveCalrendarMini = props => {
   const { dentalData } = props
+  const dateCheck = () => {
+    console.log(dentalData)
+  }
   return (
     <TableContainer component={Paper}>
-      <Table ize="small" aria-label="a dense table">
+      <Table size="small">
         <TableHead>
           <TableRow>
             {dentalData?.calendarMin?.map((row, index) => (
@@ -49,10 +45,15 @@ const ReserveCalrendarMini = props => {
                 scope="row"
                 key={index}
                 align="center"
-                className="br-gray p0 pt1">
+                className="br-gray p-05">
                 {row.display_day}
                 <br />
-                <Button variant="text">⚪︎</Button>
+                <Button
+                  variant="text"
+                  onClick={dateCheck}
+                  disabled={row.threshold === 0}>
+                  {row.threshold >= 3 ? '◎' : row.threshold === 0 ? 'x' : '⚪︎'}
+                </Button>
               </TableCell>
             ))}
           </TableRow>
