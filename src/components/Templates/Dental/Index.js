@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -32,7 +32,7 @@ const Index = () => {
     setChildCategories(res.data.children_categories)
     setDataFetch(true)
   }
-  React.useEffect(() => {
+  useEffect(() => {
     ;(async () => {
       defaultFetch(checkTreat, selectPrefecture)
     })()
