@@ -7,10 +7,13 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
+import { useRouter } from 'next/router'
+
 const ReserveCalrendarMini = props => {
+  const router = useRouter()
   const { dentalData } = props
-  const dateCheck = () => {
-    console.log(dentalData)
+  const dateCheck = row => {
+    router.push(`/reserve/${dentalData.id}?day=${row.day}`)
   }
   return (
     <TableContainer component={Paper}>
@@ -45,12 +48,13 @@ const ReserveCalrendarMini = props => {
                 scope="row"
                 key={index}
                 align="center"
-                className="br-gray p-05">
+                className="br-gray py-05 px-0">
                 {row.display_day}
                 <br />
                 <Button
                   variant="text"
-                  onClick={dateCheck}
+                  onClick={() => dateCheck(row)}
+                  className="px-0"
                   disabled={row.threshold === 0}>
                   {row.threshold >= 3 ? '◎' : row.threshold === 0 ? 'x' : '⚪︎'}
                 </Button>

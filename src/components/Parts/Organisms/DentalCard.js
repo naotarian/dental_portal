@@ -19,7 +19,7 @@ const DentalCard = ({ checkTreat, ...data }) => {
     router.push(`/reserve/${dentalData.id}`)
   }
   return (
-    <Card sx={{ minWidth: 275 }} className="mb1 br0 pointer dental-card">
+    <Card className="mb1 br0 pointer dental-card">
       <CardContent>
         <div className="flex">
           <TrainIcon />
@@ -32,14 +32,14 @@ const DentalCard = ({ checkTreat, ...data }) => {
         </Typography>
 
         <div className="mt1 mb1 flex gap-40-pc gap-10-sp">
-          <div className="min-wi-150-sp min-wi-200-tb-pc he-150">
+          <div className="min-wi-150-sp max-wi-150-sp min-wi-200-tb-pc max-wi-200-tb-pc he-150">
             <img
               src="/images/testSambnail.jpg"
               alt="テストサムネイル"
               className="wi100"
             />
           </div>
-          <div>
+          <div className="pc-only">
             <Typography variant="bold" className="mb05">
               対応している治療内容
             </Typography>
@@ -55,10 +55,30 @@ const DentalCard = ({ checkTreat, ...data }) => {
               ))}
             </Typography>
           </div>
+          <div className="sp-only">
+            <Button
+              variant="contained"
+              fullWidth
+              className="mb1"
+              startIcon={<EventAvailableIcon />}
+              onClick={reserve}>
+              ネット予約
+            </Button>
+            <Link href={`tel:${dentalData.tel}`}>
+              <a>
+                <Button
+                  variant="outlined"
+                  fullWidth
+                  startIcon={<LocalPhoneIcon />}>
+                  電話予約
+                </Button>
+              </a>
+            </Link>
+          </div>
         </div>
         <ReserveCalrendarMini dentalData={dentalData} />
       </CardContent>
-      <CardActions className="justify-center gap-40">
+      <CardActions className="justify-center gap-40 pc-only">
         <Button
           variant="contained"
           startIcon={<EventAvailableIcon />}

@@ -439,6 +439,9 @@ a {
 .pointer {
   cursor: pointer;
 }
+.dental-card {
+  box-sizing: content-box;
+}
 .dental-card:hover {
   border: 1px solid #dff2f6;
 }

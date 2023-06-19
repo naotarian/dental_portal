@@ -56,6 +56,7 @@ const Index = props => {
     setRemark,
     submit,
     errors,
+    reserveDayYmd,
     setReserveDayYmd,
   } = props
   const [dateSelect, setDateSelect] = useState(false)
@@ -64,7 +65,7 @@ const Index = props => {
     if (errors) {
       return errors.map((data, i) => {
         return (
-          <Stack sx={{ width: '100%' }} spacing={2} className="mb05">
+          <Stack sx={{ width: '100%' }} key={i} spacing={2} className="mb05">
             <Alert severity="error">{data}</Alert>
           </Stack>
         )
@@ -167,6 +168,7 @@ const Index = props => {
                   setDayList={setDayList}
                   reserveTime={reserveTime}
                   setReserveTime={setReserveTime}
+                  reserveDayYmd={reserveDayYmd}
                   setReserveDayYmd={setReserveDayYmd}
                 />
               </>

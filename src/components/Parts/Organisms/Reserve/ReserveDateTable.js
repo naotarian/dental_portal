@@ -20,10 +20,10 @@ const ReserveDateTable = props => {
     reserveDay,
     setReserveDay,
     dayList,
-    setDayList,
     reserveTime,
     setReserveTime,
     setReserveDayYmd,
+    reserveDayYmd,
   } = props
   const cal = date => {
     return [...Array(7)].map((_, i) => {
@@ -50,6 +50,7 @@ const ReserveDateTable = props => {
           style={{
             borderRight: '1px solid #ddd',
             color: date[i].color,
+            background: reserveDayYmd === date[i]?.day_ymd ? '#dff2f6' : '',
           }}>
           <Button
             style={{ color: date[i].color, fontWeight: 'bold' }}

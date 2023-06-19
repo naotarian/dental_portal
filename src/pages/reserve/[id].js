@@ -41,10 +41,21 @@ const reserve = () => {
   useEffect(() => {
     ;(async () => {
       if (!router.isReady) return
+      console.log(router.query)
       const id = router.query.id
       setManageId(id)
       const res = await axios.post('/api/portal/dental/detail', { id })
+      console.log(res.data)
       setDental(res.data.dental)
+      if (router.query?.day) {
+        setReserveDayYmd(router.query?.day)
+        setReserveDay('2023年06月19日(月)')
+        // const res = await axios.post('/api/portal/reserve/calendar', {
+        //   id,
+        //   medicalHopeId,
+        // })
+        console.log(res.data)
+      }
     })()
   }, [router.asPath])
   useEffect(() => {
@@ -164,6 +175,7 @@ const reserve = () => {
               setRemark={setRemark}
               submit={submit}
               errors={errors}
+              reserveDayYmd={reserveDayYmd}
               setReserveDayYmd={setReserveDayYmd}
             />
           )}
