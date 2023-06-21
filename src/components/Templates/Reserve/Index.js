@@ -183,6 +183,7 @@ const Index = props => {
                 setMonth={setMonth}
                 day={day}
                 setDay={setDay}
+                lastName={lastName}
                 setLastName={setLastName}
                 setFirstName={setFirstName}
                 setLastNameKana={setLastNameKana}

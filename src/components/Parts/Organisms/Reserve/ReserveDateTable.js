@@ -50,16 +50,31 @@ const ReserveDateTable = props => {
           style={{
             borderRight: '1px solid #ddd',
             color: date[i].color,
-            background: reserveDayYmd === date[i]?.day_ymd ? '#dff2f6' : '',
+            background:
+              date[i].is_closed || !date[i].threshold
+                ? '#f5f5f5'
+                : reserveDayYmd === date[i]?.day_ymd
+                ? '#dff2f6'
+                : '',
           }}>
           <Button
             style={{ color: date[i].color, fontWeight: 'bold' }}
             className="min-10 p0"
-            disabled={date[i].is_closed}
+            disabled={date[i].is_closed || !date[i].threshold}
             onClick={() => reserveDateSelect(date[i]?.day, date[i]?.day_ymd)}>
             {date[i]?.date}
             <br />
-            {date[i].is_closed ? '休' : '⚪︎'}
+            {date[i].is_closed ? (
+              '休'
+            ) : date[i].threshold >= 3 ? (
+              <>&#9678;</>
+            ) : date[i].threshold >= 2 ? (
+              <>&#9675;</>
+            ) : date[i].threshold >= 1 ? (
+              <>&#9651;</>
+            ) : (
+              '×'
+            )}
           </Button>
         </TableCell>
       )
@@ -129,23 +144,27 @@ const ReserveDateTable = props => {
           </TableBody>
         </Table>
       </TableContainer>
-      {reserveDay && (
+      {reserveDay && dayList && (
         <div className="mt2">
           <div className="bg-iceberg text-c p1 mt1 mb1 relative">
             <Typography variant="bold">時間を選択してください。</Typography>
             <span className="caption2">必須</span>
           </div>
-          <div className="flex gap-20 flex-wrap ">
-            {dayList?.map((data, index) => (
-              <Button
-                key={index}
-                variant={data === reserveTime ? 'contained' : 'outlined'}
-                onClick={() => {
-                  setReserveTime(data)
-                }}>
-                {data}
-              </Button>
-            ))}
+          <div className="flex gap-20 flex-wrap">
+            {Object.entries(dayList)?.map((data, index) => {
+              if (data[1]) {
+                return (
+                  <Button
+                    key={index}
+                    variant={data === reserveTime ? 'contained' : 'outlined'}
+                    onClick={() => {
+                      setReserveTime(data[0])
+                    }}>
+                    {data[0]}
+                  </Button>
+                )
+              }
+            })}
           </div>
         </div>
       )}

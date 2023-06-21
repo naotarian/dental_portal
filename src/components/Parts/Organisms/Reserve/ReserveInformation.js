@@ -14,6 +14,7 @@ const ReserveInformation = props => {
     setMonth,
     day,
     setDay,
+    lastName,
     setLastNameKana,
     setFirstNameKana,
     setFirstName,
@@ -90,6 +91,7 @@ const ReserveInformation = props => {
             <TextField
               label="姓"
               size="small"
+              value={lastName}
               onChange={e => {
                 setLastName(e.target.value)
               }}

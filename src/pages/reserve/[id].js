@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -9,6 +9,7 @@ import axios from '@/lib/axios'
 
 const reserve = () => {
   const router = useRouter()
+  const isFirstRender = useRef(true)
   const [manageId, setManageId] = useState('')
   const [dental, setDental] = useState(null)
   const [dates, setDates] = useState(null)
@@ -41,21 +42,15 @@ const reserve = () => {
   useEffect(() => {
     ;(async () => {
       if (!router.isReady) return
-      console.log(router.query)
       const id = router.query.id
       setManageId(id)
-      const res = await axios.post('/api/portal/dental/detail', { id })
-      console.log(res.data)
+      const res = await axios.post('/api/portal/dental/detail', {
+        id: id,
+        day: router.query?.day,
+      })
       setDental(res.data.dental)
-      if (router.query?.day) {
-        setReserveDayYmd(router.query?.day)
-        setReserveDay('2023年06月19日(月)')
-        // const res = await axios.post('/api/portal/reserve/calendar', {
-        //   id,
-        //   medicalHopeId,
-        // })
-        console.log(res.data)
-      }
+      if (router.query?.day) setReserveDayYmd(router.query?.day)
+      setReserveDay(res.data.reserve_day)
     })()
   }, [router.asPath])
   useEffect(() => {
@@ -66,15 +61,28 @@ const reserve = () => {
         id,
         medicalHopeId,
       })
+      console.log(res.data)
       setDates(res.data.dates)
       setCalendarDisplayYM(res.data.display_ym)
       setNextDate(res.data.next_date)
       setPrevDate(res.data.prev_date)
       setMinDate(res.data.min_date)
       setMaxDate(res.data.max_date)
-      setDayList(res.data.date_list)
     })()
   }, [medicalHopeId])
+  useEffect(() => {
+    ;(async () => {
+      if (isFirstRender.current) {
+        isFirstRender.current = false
+        return
+      }
+      const res = await axios.post('/api/portal/reserve/day_list', {
+        manageId,
+        reserveDayYmd,
+      })
+      setDayList(res.data)
+    })()
+  }, [reserveDayYmd])
   const dateChange = async kind => {
     if (!router.isReady) return
     const id = router.query.id
@@ -88,6 +96,9 @@ const reserve = () => {
     setNextDate(res.data.next_date)
     setPrevDate(res.data.prev_date)
     setDayList(res.data.date_list)
+    setReserveDayYmd('')
+    setReserveDay('')
+    setReserveTime('')
   }
   const submit = async () => {
     try {
