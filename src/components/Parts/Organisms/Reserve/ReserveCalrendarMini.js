@@ -56,7 +56,13 @@ const ReserveCalrendarMini = props => {
                   onClick={() => dateCheck(row)}
                   className="px-0"
                   disabled={row.threshold === 0}>
-                  {row.threshold >= 3 ? '◎' : row.threshold === 0 ? 'x' : '⚪︎'}
+                  {row.threshold >= 3
+                    ? '◎'
+                    : row.threshold >= 2
+                    ? '⚪︎'
+                    : row.threshold >= 1
+                    ? '▲'
+                    : '×'}
                 </Button>
               </TableCell>
             ))}

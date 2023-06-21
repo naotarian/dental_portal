@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid'
 
 import DentalCard from '@/components/Parts/Organisms/DentalCard'
 import SearchDialog from '@/components/Parts/Organisms/Dialog/SearchDialog'
+import DowChipArray from '@/components/Parts/Organisms/Reserve/DowChipArray'
 import PrefectureChipArray from '@/components/Parts/Organisms/Reserve/PrefectureChipArray'
 import SelectTreatChipArray from '@/components/Parts/Organisms/Reserve/SelectTreatChipArray'
 import SideSearchArea from '@/components/Parts/Organisms/Reserve/SideSearchArea'
@@ -22,9 +23,12 @@ const Index = () => {
   const [childCategories, setChildCategories] = useState(null)
   const [selectPrefecture, setSelectPrefecture] = useState([])
   const [checkTreat, setCheckTreat] = useState([])
+  const [dow, setDow] = useState([])
+  const [checkDow, setCheckDow] = useState([])
   const defaultFetch = async (treat, prefecture) => {
-    const sendData = { treat, prefecture }
+    const sendData = { treat, prefecture, checkDow }
     const res = await axios.post('/api/portal/dental', sendData)
+    setDow(res.data.dow)
     setRegions(res.data.regions)
     setDentals(res.data.dentals)
     setCategories(res.data.categories)
@@ -34,9 +38,9 @@ const Index = () => {
   }
   useEffect(() => {
     ;(async () => {
-      defaultFetch(checkTreat, selectPrefecture)
+      defaultFetch(checkTreat, selectPrefecture, checkDow)
     })()
-  }, [checkTreat, selectPrefecture])
+  }, [checkTreat, selectPrefecture, checkDow])
   const prefectureChange = async number => {
     const sendData = { prefecture: number, treat: checkTreat }
     setSelectPrefecture([number])
@@ -56,6 +60,14 @@ const Index = () => {
       setCheckTreat(prevState => prevState.filter(value => value !== id))
     }
   }
+  const dowChange = (e, id) => {
+    if (e.target.checked) {
+      setCheckDow(prevState => [...prevState, id])
+    }
+    if (!e.target.checked) {
+      setCheckDow(prevState => prevState.filter(value => value !== id))
+    }
+  }
   return (
     <>
       {dataFetch && (
@@ -70,6 +82,9 @@ const Index = () => {
               checkTreat={checkTreat}
               selectTreatChange={selectTreatChange}
               prefectureChange={prefectureChange}
+              dow={dow}
+              checkDow={checkDow}
+              dowChange={dowChange}
             />
             <Grid item xs={12} md={8} lg={8}>
               {selectPrefecture.length > 0 && (
@@ -88,6 +103,16 @@ const Index = () => {
                     array={checkTreat}
                     setCheckTreat={setCheckTreat}
                     childCategories={childCategories}
+                  />
+                </div>
+              )}
+              {checkDow.length > 0 && (
+                <div className="mb1">
+                  <DowChipArray
+                    array={checkDow}
+                    setCheckDow={setCheckDow}
+                    dow={dow}
+                    defaultFetch={defaultFetch}
                   />
                 </div>
               )}

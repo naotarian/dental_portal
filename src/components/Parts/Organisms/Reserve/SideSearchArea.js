@@ -33,6 +33,9 @@ const SideSearchArea = props => {
     checkTreat,
     selectTreatChange,
     prefectureChange,
+    dow,
+    checkDow,
+    dowChange,
   } = props
   return (
     <Grid item xs={4} md={4} lg={4} className="pc-only">
@@ -117,6 +120,26 @@ const SideSearchArea = props => {
                 ))}
               </div>
             </React.Fragment>
+          ))}
+        </div>
+      </div>
+      <div className="side-bar-search-card b-gray mb1 wi100">
+        <div className="text-c bg-iceberg p1">
+          <Typography variant="bold">曜日検索</Typography>
+        </div>
+        <div className="p1 bg-white">
+          {dow.map((data, index) => (
+            <FormGroup key={index}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={checkDow.includes(data.id)}
+                    onChange={e => dowChange(e, data.id)}
+                  />
+                }
+                label={data.name}
+              />
+            </FormGroup>
           ))}
         </div>
       </div>

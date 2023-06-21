@@ -22,10 +22,17 @@ const DentalCard = ({ checkTreat, ...data }) => {
     <Card className="mb1 br0 pointer dental-card">
       <CardContent>
         <div className="flex">
-          <TrainIcon />
-          <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-            {dentalData.selected_station?.remark}
-          </Typography>
+          {dentalData.selected_station?.remark && (
+            <>
+              <TrainIcon color="info" />
+              <Typography
+                sx={{ fontSize: 16 }}
+                color="text.secondary"
+                gutterBottom>
+                {dentalData.selected_station?.remark}
+              </Typography>
+            </>
+          )}
         </div>
         <Typography variant="largeBold" component="div">
           {dentalData.dental_name}
@@ -39,22 +46,24 @@ const DentalCard = ({ checkTreat, ...data }) => {
               className="wi100"
             />
           </div>
-          <div className="pc-only">
-            <Typography variant="bold" className="mb05">
-              対応している治療内容
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              {dentalData?.medical_treatments?.map((data, index) => (
-                <span
-                  key={index}
-                  style={{
-                    color: checkTreat.includes(data.id) ? 'red' : '#333',
-                  }}>
-                  {data.title}/
-                </span>
-              ))}
-            </Typography>
-          </div>
+          {dentalData?.medical_treatments.length > 0 && (
+            <div className="pc-only">
+              <Typography variant="bold" className="mb05">
+                対応している治療内容
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                {dentalData?.medical_treatments?.map((data, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      color: checkTreat.includes(data.id) ? 'red' : '#333',
+                    }}>
+                    {data.title}/
+                  </span>
+                ))}
+              </Typography>
+            </div>
+          )}
           <div className="sp-only">
             <Button
               variant="contained"
